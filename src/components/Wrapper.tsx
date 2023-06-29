@@ -3,9 +3,11 @@ import { PropsWithChildren, useEffect, useRef } from "react";
 import Controller, { IControllerOptions } from "../Controller/Controller";
 export interface IWrapper extends IControllerOptions {
     name: string;
+    className?: string;
+    style?: React.CSSProperties;
 }
 export default function Wrapper(props: PropsWithChildren<IWrapper>) {
-    const { name, children, ...options } = props;
+    const { name, children, className, style, ...options } = props;
     const ref = useRef<HTMLDivElement>(null);
     const wrapper = useRef<Controller>(new Controller(name, "", options));
     // 注册wrapper
@@ -15,7 +17,7 @@ export default function Wrapper(props: PropsWithChildren<IWrapper>) {
         }
     }, [name, options]);
     return (
-        <div ref={ref}>
+        <div ref={ref} className={className} style={style}>
             {children}
         </div>
     )

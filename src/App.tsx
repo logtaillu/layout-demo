@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <Wrapper name="demo">
+      <Wrapper name="demo" className='demo-wrapper'>
         <Grid>grid1</Grid>
         <Grid>grid2</Grid>
         <Container>

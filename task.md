@@ -6,8 +6,14 @@ Grid有哪些属性：
 容器的：isContainer,droppable,layout mode（布局规则，包含了吸附、重叠等）
 通用的：w,h,x,y,autoh,maxh,minh,resizeable,draggable,resizeHandles,isBounded
 列表：
-1. 初始化
+~~1. 初始化~~
 2. 内部元素拖拽布局/拖拽时动效和滚动
+基于webworker计算布局=>
+    1. 什么时候计算：绑定有变化的状态，触发
+    2. 怎么操作元素：修改完返回给主线程
+    3. 搜索是怎么用的：filter函数，统一处理
+    4. 有多个controller的情况
+muuri的hide是元素都存在,但是display:none
 3. Wrapper: 整体最大、最小、固定宽度
 4. autoHeight
 5. 网格化：双向，网格数/网格粒度

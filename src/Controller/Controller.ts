@@ -1,3 +1,4 @@
+// 布局控制器
 // 布局元素选项
 export interface IGridOptions {
     // 是否可拖拽

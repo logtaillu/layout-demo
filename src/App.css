@@ -3,8 +3,19 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  width: 100%;
 }
-
+.demo-wrapper div{
+    height: 150px;
+    width: 150px;
+    border: 1px solid #666;
+    border-radius: 4px;
+}
+.demo-wrapper div[data-container=true]{
+  height: auto;
+  border-color: orange;
+  background-color: cornflowerblue;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
