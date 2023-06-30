@@ -29,3 +29,41 @@ muuri的hide是元素都存在,但是display:none
 13. 固定tabar/menu=>static=>虽然总高度不定高，但是要提供占满方式，菜单可能有移动端收起的样式
 14. 对齐线
 15. 一屏缩放
+
+***
+
+[
+    {
+        i,x,y,w,h,
+        marginx,
+        marginy,
+        autoSize,
+        container,
+        wsize,wcol,
+        hsize,hcol,
+        children:[]
+    },
+]
+
+grid
+    i key
+    x 横向位置
+    y 纵向位置
+    w 当前宽度
+    h 当前高度
+container
+    wsize/wcol 横向网格粒度
+    hsize/hcol 纵向网格粒度
+    autoSize 是否撑开高度
+    marginx 子元素左右间距
+    marginy 子元素上下间距
+emptyContainerHeight
+布局类型：
+1. rgl
+    1. 吸附方向
+    2. 允许重叠
+2. packer
+    1. 从左到右，向上吸附
+    2. 初始sort 0/0，那么可以匹配规则
+
+item是否需要存下来=>如果virtual load,元素不一定存在于界面上，所以需要
