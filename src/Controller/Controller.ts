@@ -36,9 +36,10 @@ export default class {
     options?: IControllerOptions = defaultOptions;
     // 布局是否可计算，取决于element是否存在
     enable = false;
-    // 初始化流程
+    // 初始化配置
     init(name: string, element: HTMLElement | string, options?: IControllerOptions) {
         this.name = name;
+        const preEnable = this.enable;
         if (typeof (element) === "string") {
             if (element) {
                 this.element = document.querySelector(element);
@@ -50,6 +51,9 @@ export default class {
         }
         this.enable = this.exist();
         this.options = { ...this.options, ...options };
+        if (!preEnable && this.enable) {
+            // start
+        }
     }
     // element是否存在，参考muuri的判断
     exist() {

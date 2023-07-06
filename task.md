@@ -1,22 +1,35 @@
+重新再整理下逻辑
+1. 哪些item是可见的，外壳如何知道
+2. 全局可以只需要一个controller,container内定义内部规则(name/calculator)
+
 定义：
-Wrapper：外包装，定义一个范围，控制里面的多级嵌套布局
-Grid的配置优先于Wrapper的
-Grid：非容器元素，有宽度、高度等配置项，以及是否container的选项，这些配置项可以在dataset中标识出来
-Grid有哪些属性：
-容器的：isContainer,droppable,layout mode（布局规则，包含了吸附、重叠等）
-通用的：w,h,x,y,autoh,maxh,minh,resizeable,draggable,resizeHandles,isBounded
-列表：
-~~1. 初始化~~
-2. 内部元素拖拽布局/拖拽时动效和滚动
-基于webworker计算布局=>
-    1. 什么时候计算：绑定有变化的状态，触发
-    2. 怎么操作元素：修改完返回给主线程
-    3. 搜索是怎么用的：filter函数，统一处理
-    4. 有多个controller的情况
-muuri的hide是元素都存在,但是display:none
-3. Wrapper: 整体最大、最小、固定宽度
-4. autoHeight
-5. 网格化：双向，网格数/网格粒度
+Wrapper：定义一个范围，控制计算里面的多级嵌套布局
+Grid：布局元素
+通用：w,h,x,y,autoh,maxh,minh,resizeable,draggable,resizeHandles,isBounded
+容器：isContainer,droppable,layout mode（布局规则，包含了吸附、重叠等，可能？）
+容器通过data-container标识，先计算内层容器，再计算外层容器
+name在容器上，不需要在Wrapper上，首先把计算过程拿过来，看下需要什么
+
+WebWorker：
+可以访问navigator和location
+var worker = new Worker('work.js'); // 要执行的文件，也可以blob建立出来
+worker.postMessage 给worker发送信息
+worker.onmessage 接收信息
+self.onmessage worker内部接收信息
+可以直接传递二进制数据，但是主线程就不能用这个数据了
+问题：
+1. 什么时候计算：绑定有变化的状态，触发
+2. 怎么操作元素：修改完返回给主线程
+3. 搜索是怎么用的：filter函数，统一处理
+4. 有多个controller的情况
+
+列表
+1. 拖拽布局的基础实现
+2. 动效
+3. 滚动下滑
+4. Wrapper: 整体最大、最小、固定宽度
+5. autoHeight不定高度
+6. 网格化：双向，网格数/网格粒度
 网格数：分成几格，定高容器才能用网格数
 网格粒度：单网格体积
 6. 大量数据=>类似react-virtualized的masonry的情况、同时可以滚动加载
@@ -27,8 +40,11 @@ muuri的hide是元素都存在,但是display:none
 11. 虚拟列表（自动换行）=>可以滚动加载，内外可以用不同的布局模式
 12. 响应式切换
 13. 固定tabar/menu=>static=>虽然总高度不定高，但是要提供占满方式，菜单可能有移动端收起的样式
+13. 展示与不展示的元素:display:none，但是内部如果有复杂渲染？
 14. 对齐线
 15. 一屏缩放
+16. 特殊组件-固定接收槽
+17. 文档形式的布局
 
 ***
 
