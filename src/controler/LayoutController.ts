@@ -1,13 +1,15 @@
 import { INestGrids } from "../interface";
-import NestMap from "./NestMap";
-
+import GridItem from "./GridItem";
+import NestMap, { IItemOrAry } from "./NestMap";
+const createItem = (info: INestGrids) => new GridItem(info);
 export default class LayoutController {
     // grids map
-    items: NestMap<INestGrids> = new NestMap();
+    items: NestMap<INestGrids, GridItem> = new NestMap([], createItem);
 
     // add items
-    add() {
-        // todo
+    add(val: IItemOrAry<INestGrids>, parentId?: string) {
+        this.items.add(val, parentId);
+        this.refresh();
     }
 
     // refresh layouts
