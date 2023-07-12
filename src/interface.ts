@@ -2,6 +2,8 @@ export type AffixDirection = "left" | "top" | "right" | "bottom";
 export type ResizeHandle = "s" | "w" | "e" | "n" | "sw" | "nw" | "se" | "ne";
 /** grid config */
 export interface IGrid {
+    /** 是否容器类型 */
+    container?: boolean;
     /** unique identification @todo */
     id: string;
     /** x position @default 0 @todo */
@@ -36,19 +38,17 @@ export interface IGrid {
     bound?: boolean;
     /** 是否可以被规则自动调整 @default false  @todo*/
     static?: boolean;
-}
-
-export interface IBreakPoint {
-    width: number;
-    wcol: number;
+    /** 是否激活 @default false  @todo*/
+    active?: boolean;
 }
 
 /** container config, the container is a special grid */
 export interface IContainer extends IGrid {
+    container: true;
     /** scope  @todo*/
     name?: string;
     /** layout type  @todo*/
-    calculator: string;
+    calculator?: string;
 
     /** x向网格数，优先于网格粒度  @todo*/
     xcol?: number;
@@ -76,6 +76,11 @@ export interface IContainer extends IGrid {
     droppable?: boolean;
     /** 缩放 @default 1 @todo*/
     scale?: number;
-    /** bk配置, <=width时，使用wcol，或者可以任意配置项？ */
-    breakPoints?: Record<string, IBreakPoint>;
+    /** bk配置, <=width时，使用wcol，或者可以任意配置项？不确定怎么定义 @todo*/
+    breakPoints?: Record<string, Partial<IContainer>>;
+}
+
+export type IEelementSelector = HTMLDivElement | string;
+export interface INestGrids extends IContainer {
+    children?: IContainer[];
 }
