@@ -4,19 +4,12 @@ export default class GridItem {
     item: INestGrids;
     top = 0;
     left = 0;
-    childs: INestGrids[] = [];
+    active = true;
     constructor(item: INestGrids) {
         this.item = item;
     }
-    
     get id() {
         return this.item.id;
-    }
-    get active() {
-        return this.item.active;
-    }
-    get children() {
-        return this.childs;
     }
     get translate() {
         return `translate(${this.top}px, ${this.left}px)`;

@@ -1,9 +1,10 @@
 export type IItemOrAry<T> = T | T[] | undefined;
 type IItemFunc<T> = (target: T, parent?: T) => void;
-type IBaseNestMap<T> = { id: string, children?: T[], active?: boolean };
+type IBaseNestMap<T> = { id: string, children?: T[] };
 class DefaultCreator<T>{
     item: T;
     parent?: DefaultCreator<T>;
+    active? = true;
     constructor(item: T, parent?: DefaultCreator<T>) {
         this.item = item;
         this.parent = parent;
@@ -14,6 +15,7 @@ class DefaultCreator<T>{
 export default class NestMap<T extends IBaseNestMap<T>, C extends {
     item: T;
     parent?: C;
+    active?: boolean;
 }> {
     data: T[] = [];
     linkMap: Map<string, C> = new Map();
@@ -72,11 +74,11 @@ export default class NestMap<T extends IBaseNestMap<T>, C extends {
 
     private recursive(val: IItemOrAry<T>, func: IItemFunc<C>, parent?: C) {
         this.toAry(val).forEach(info => {
-            if (info.active === false) {
-                return;
-            }
             const { children, id } = info;
             const item = this.item(id);
+            if (item?.active === false) {
+                return;
+            }
             if (children?.length) {
                 this.recursive(children, func, item);
             } else if (item) {

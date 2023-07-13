@@ -38,8 +38,6 @@ export interface IGrid {
     bound?: boolean;
     /** 是否可以被规则自动调整 @default false  @todo*/
     static?: boolean;
-    /** 是否激活 @default false  @todo*/
-    active?: boolean;
 }
 
 /** container config, the container is a special grid */
